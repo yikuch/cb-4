@@ -1,0 +1,49 @@
+program             ::= ( declassignment ";" | functiondefinition )*
+
+functiondefinition  ::= type id "(" ( parameterlist )? ")" "{" statementlist "}"
+parameterlist       ::= type id ( "," type id )*
+functioncall        ::= id "(" ( assignment ( "," assignment )* )? ")"
+
+statementlist       ::= ( block )*
+block               ::= "{" statementlist "}"
+                      | statement
+
+statement           ::= ifstatement
+                      | forstatement
+                      | whilestatement
+                      | returnstatement ";"
+                      | dowhilestatement ";"
+                      | printf ";"
+                      | declassignment ";"
+                      | statassignment ";"
+                      | functioncall ";"
+statblock           ::= "{" statementlist "}"
+                      | statement
+
+ifstatement         ::= <KW_IF> "(" assignment ")" statblock ( <KW_ELSE> statblock )?
+forstatement        ::= <KW_FOR> "(" ( statassignment | declassignment ) ";" expr ";" statassignment ")" statblock
+dowhilestatement    ::= <KW_DO> statblock <KW_WHILE> "(" assignment ")"
+whilestatement      ::= <KW_WHILE> "(" assignment ")" statblock
+returnstatement     ::= <KW_RETURN> ( assignment )?
+printf              ::= <KW_PRINTF> "(" (assignment | CONST_STRING) ")"
+declassignment      ::= type id ( "=" assignment )?
+
+statassignment      ::= id "=" assignment
+assignment          ::= id "=" assignment
+                      | expr
+expr                ::= simpexpr ( "==" simpexpr | "!=" simpexpr | "<=" simpexpr | ">=" simpexpr | "<" simpexpr | ">" simpexpr )?
+simpexpr            ::= ( "-" term | term ) ( "+" term | "-" term | "||" term )*
+term                ::= factor ( "*" factor | "/" factor | "&&" factor )*
+factor              ::= <CONST_INT>
+                      | <CONST_FLOAT>
+                      | <CONST_BOOLEAN>
+                      | functioncall
+                      | id
+                      | "(" assignment ")"
+
+
+type                ::= <KW_BOOLEAN>
+                      | <KW_FLOAT>
+                      | <KW_INT>
+                      | <KW_VOID>
+id                  ::= <ID>
