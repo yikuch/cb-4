@@ -25,7 +25,7 @@ Zur Lösung der Aufgaben steht für Sie dieses Repository mit
 zur Verfügung.
 
 ## Aufgabenstellung
-Der von uns verwendete Parsergenerator *bison* sollte Ihnen bereits aus der Vorlesung bekannt sein. Da Materialien zu Bison (Handbücher, Tutorials, …) sehr zahlreich im Netz vorhanden sind, wird hier auf eine weitere Erklärung verzichtet.
+Der von uns verwendete Parsergenerator *bison* sollte Ihnen bereits aus der Übung bekannt sein. Da Materialien zu Bison (Handbücher, Tutorials, …) sehr zahlreich im Netz vorhanden sind, wird hier auf eine weitere Erklärung verzichtet.
 
 Ihre Aufgabe besteht darin, einen Parser für die Sprache C1 zu erstellen. Dazu bekommen Sie von uns einen Scanner. (Sie können theoretisch auch Ihren Scanner vom Aufgabenblatt 2 benutzen – zur Korrektur werden wir jedoch den von uns vorgegebenen verwenden!)
 
@@ -88,7 +88,6 @@ Dabei ist im Prinzip fast alles erlaubt, nur die Sprache darf sich natürlich ni
 
 ### Folgende Anforderungen werden an Ihre Lösung gestellt:
 
-- wenn man den Parser ohne Kommandozeilenparameter aufruft, soll er von stdin lesen, ansonsten aus der auf der Kommandozeile angegebenen Datei (dabei sollen eventuell auftauchende Dateizugriffsfehler wie üblich abgefangen werden)
 - die Implementation erfolgt in der Datei minako-syntax.y 
 - der Parser gibt im erfolgreichen Fall nichts aus und beendet sich mit dem Rückgabewert 0 
 - bei einem Parserfehler wird eine Fehlermeldung (beendet durch ein Newline) ausgegeben und das Programm mit einem Rückgabewert != 0 beendet 

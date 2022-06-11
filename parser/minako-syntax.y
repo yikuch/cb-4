@@ -44,6 +44,16 @@
 %token CONST_STRING  "string literal"
 %token ID            "identifier"
 
+// definition of association and precedence of operators
+%left '+' '-' OR
+%left '*' '/' AND
+%nonassoc UMINUS
+
+// workaround for handling dangling else
+// LOWER_THAN_ELSE stands for a not existing else
+%nonassoc LOWER_THAN_ELSE
+%nonassoc KW_ELSE
+
 %%
 
 program:
@@ -52,13 +62,21 @@ program:
 
 %%
 
-int main() {
+int main(int argc, char *argv[]) {
 	yydebug = 1;
-	// TODO: add code to open and read from the input file
-	// (if passed to the program)
+
+	if (argc < 2) {
+		yyin = stdin;
+	} else {
+		yyin = fopen(argv[1], "r");
+		if (yyin == 0) {
+			printf("ERROR: Datei %s nicht gefunden", argv[1]);
+		}
+	}
+
 	return yyparse();
 }
 
 void yyerror(const char *msg) {
-	// TODO: print error messages
+	fprintf(stderr, "Line %d: %s\n", yylineno, msg);
 }
